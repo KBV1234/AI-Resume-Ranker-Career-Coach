@@ -1,5 +1,24 @@
 from fpdf import FPDF
 from datetime import datetime
+from ai_report import generate_pdf_report
+
+
+# -----------------------------
+# 📥 AI Report Download Section
+# -----------------------------
+if st.button("📊 Generate AI Report as PDF"):
+    with st.spinner("Preparing your personalized AI report..."):
+        if 'ai_response' not in locals():
+            st.warning("Please generate AI feedback first.")
+        else:
+            pdf_data = generate_pdf_report(details, ai_response, ats_score)
+            st.download_button(
+                label="📥 Download AI Resume Report",
+                data=pdf_data,
+                file_name="AI_Resume_Report.pdf",
+                mime="application/pdf"
+            )
+
 
 # -------------------------------------------------
 # Generate AI Resume Report as PDF
